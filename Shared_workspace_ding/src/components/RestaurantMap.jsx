@@ -72,43 +72,28 @@ const RestaurantMap = ({ restaurants, selectedRestaurant, setSelectedRestaurant 
           ">
             ${getTypeIcon(type)}
           </div>
-        `,
-        iconSize: [36, 36],
+        `,        iconSize: [36, 36],
         iconAnchor: [18, 18]
       })
 
       const marker = L.marker([lat, lng], { icon: customIcon })
         .bindPopup(`
-          <div class="p-4 min-w-64">
+          <div class="p-3 min-w-48">
             <div class="flex justify-between items-start mb-2">
-              <h3 class="font-bold text-lg">${name}</h3>
+              <h3 class="font-bold text-base">${name}</h3>
               <span class="text-xs px-2 py-1 rounded-full ${isOpen ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                ${isOpen ? 'Geöffnet' : 'Geschlossen'}
+                ${isOpen ? 'Offen' : 'Geschlossen'}
               </span>
             </div>
-            <div class="space-y-2">
-              <div class="flex justify-between text-sm">
-                <span>Küche:</span>
-                <span class="font-medium capitalize">${cuisine}</span>
-              </div>
-              <div class="flex justify-between text-sm">
-                <span>Preisklasse:</span>
-                <span class="font-medium">${priceRange}</span>
-              </div>
-              <div class="flex justify-between text-sm">
-                <span>Bewertung:</span>
-                <span class="font-medium">${rating} ⭐</span>
-              </div>
-              <div class="text-sm text-gray-600">${restaurant.description}</div>
-              <div class="flex gap-2 text-xs">
-                ${restaurant.delivery ? '<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">🚚 Lieferung</span>' : ''}
-                ${restaurant.takeaway ? '<span class="bg-green-100 text-green-800 px-2 py-1 rounded">🥡 Abholung</span>' : ''}
-              </div>
-              <button class="mt-3 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors menu-btn" 
-                      data-restaurant-id="${restaurant.id}">
-                📋 Speisekarte anzeigen
-              </button>
+            <div class="text-sm text-gray-600 mb-2">${cuisine} • ${priceRange} • ${rating} ⭐</div>
+            <div class="flex gap-1 text-xs mb-3">
+              ${restaurant.delivery ? '<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">🚚</span>' : ''}
+              ${restaurant.takeaway ? '<span class="bg-green-100 text-green-800 px-2 py-1 rounded">🥡</span>' : ''}
             </div>
+            <button class="w-full bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 transition-colors menu-btn text-sm" 
+                    data-restaurant-id="${restaurant.id}">
+              Speisekarte anzeigen
+            </button>
           </div>
         `)
         .addTo(mapInstanceRef.current)
@@ -145,36 +130,13 @@ const RestaurantMap = ({ restaurants, selectedRestaurant, setSelectedRestaurant 
       default: return '🏪'
     }
   }
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="p-4 border-b bg-gray-50">
-        <h2 className="text-lg font-semibold text-gray-900">Kartenansicht</h2>
-        <p className="text-sm text-gray-600 mt-1">
-          Klicke auf einen Marker, um die Speisekarte anzuzeigen
+      <div className="p-3 border-b bg-gray-50">
+        <h2 className="text-lg font-semibold text-gray-900">🗺️ Karte</h2>
+        <p className="text-sm text-gray-600">
+          {restaurants.length} Restaurant{restaurants.length !== 1 ? 's' : ''} • Klicke auf einen Marker für Details
         </p>
-        <div className="flex items-center space-x-6 mt-3 text-sm">
-          <div className="flex items-center space-x-1">
-            <span>🍽️</span>
-            <span>Restaurant</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <span>🥡</span>
-            <span>Takeaway</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <span>☕</span>
-            <span>Café</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span>Geöffnet</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-            <span>Geschlossen</span>
-          </div>
-        </div>
       </div>
       <div 
         ref={mapRef} 

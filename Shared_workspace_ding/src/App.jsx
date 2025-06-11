@@ -145,19 +145,23 @@ function App() {
         </div>
       )}
 
-      <main className="container mx-auto px-4 py-6">
-        {viewMode === 'map' ? (
-          <RestaurantMap 
-            restaurants={restaurants}
-            selectedRestaurant={selectedRestaurant}
-            setSelectedRestaurant={setSelectedRestaurant}
-          />
-        ) : (
-          <RestaurantList 
-            restaurants={restaurants}
-            selectedRestaurant={selectedRestaurant}
-            setSelectedRestaurant={setSelectedRestaurant}
-          />
+      <main className="container mx-auto px-4 py-4">
+        {!selectedRestaurant && (
+          <>
+            {viewMode === 'map' ? (
+              <RestaurantMap 
+                restaurants={restaurants}
+                selectedRestaurant={selectedRestaurant}
+                setSelectedRestaurant={setSelectedRestaurant}
+              />
+            ) : (
+              <RestaurantList 
+                restaurants={restaurants}
+                selectedRestaurant={selectedRestaurant}
+                setSelectedRestaurant={setSelectedRestaurant}
+              />
+            )}
+          </>
         )}
         
         {selectedRestaurant && (

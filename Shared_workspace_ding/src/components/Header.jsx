@@ -17,30 +17,22 @@ const Header = ({ viewMode, setViewMode, connectionStatus, filters, setFilters }
     { value: 'takeaway', label: 'Takeaway' },
     { value: 'cafe', label: 'Café' }
   ]
-
   return (
     <header className="bg-white shadow-sm border-b">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold text-gray-900">
-              🍕 Restaurant Finder
-            </h1>
-            <div className="flex items-center space-x-2">
-              <span className={`w-3 h-3 rounded-full ${
-                connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'
-              }`}></span>
-              <span className="text-sm text-gray-600">
-                {connectionStatus === 'connected' ? 'Live' : 'Offline'}
-              </span>
-            </div>
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <h1 className="text-xl font-bold text-gray-900">🍕 Restaurant Finder</h1>
+            <div className={`w-2 h-2 rounded-full ${
+              connectionStatus === 'connected' ? 'bg-green-500' : 'bg-red-500'
+            }`}></div>
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <div className="bg-gray-100 rounded-lg p-1 flex">
               <button
                 onClick={() => setViewMode('map')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   viewMode === 'map'
                     ? 'bg-white text-blue-600 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
@@ -50,7 +42,7 @@ const Header = ({ viewMode, setViewMode, connectionStatus, filters, setFilters }
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   viewMode === 'list'
                     ? 'bg-white text-blue-600 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
@@ -59,19 +51,11 @@ const Header = ({ viewMode, setViewMode, connectionStatus, filters, setFilters }
                 📋 Liste
               </button>
             </div>
-          </div>
-        </div>
-        
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <div className="text-sm text-gray-600">
-            <p>Entdecke Restaurants, Menüs und Preise in deiner Nähe</p>
-          </div>
-          
-          <div className="flex flex-wrap gap-3 ml-auto">
+            
             <select
               value={filters.cuisine}
               onChange={(e) => setFilters(prev => ({ ...prev, cuisine: e.target.value }))}
-              className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
             >
               {cuisineOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -83,7 +67,7 @@ const Header = ({ viewMode, setViewMode, connectionStatus, filters, setFilters }
             <select
               value={filters.type}
               onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))}
-              className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
             >
               {typeOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -92,7 +76,7 @@ const Header = ({ viewMode, setViewMode, connectionStatus, filters, setFilters }
               ))}
             </select>
             
-            <label className="flex items-center space-x-2 text-sm">
+            <label className="flex items-center space-x-2 text-sm bg-gray-50 px-3 py-1.5 rounded-md">
               <input
                 type="checkbox"
                 checked={filters.delivery}
